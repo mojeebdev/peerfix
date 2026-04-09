@@ -34,7 +34,7 @@ export default function Footer() {
           </p>
 
           <div className="flex items-center gap-4 flex-wrap">
-            
+            <a
               href="https://blindspotlab.xyz"
               target="_blank"
               rel="noreferrer"
@@ -54,7 +54,7 @@ export default function Footer() {
 
             <span className="mono text-xs text-gray-400">
               made with ❤️ by{" "}
-              
+              <a
                 href="https://mojeeb.xyz"
                 target="_blank"
                 rel="noreferrer"
