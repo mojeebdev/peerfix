@@ -2,6 +2,7 @@ import { auth } from "@/lib/auth"
 import { redirect } from "next/navigation"
 import { prisma } from "@/lib/prisma"
 import ApplicantCard from "@/components/admin/ApplicantCard"
+import { ExpertWithUser } from "@/types"
 
 export default async function AdminExpertsPage() {
   const session = await auth()
@@ -12,11 +13,11 @@ export default async function AdminExpertsPage() {
       user: { select: { id: true, name: true, email: true, image: true, reputation: true } },
     },
     orderBy: { createdAt: "desc" },
-  })
+  }) as ExpertWithUser[]
 
-  const pending = experts.filter((e) => e.status === "PENDING")
-  const approved = experts.filter((e) => e.status === "APPROVED")
-  const dismissed = experts.filter((e) => e.status === "DISMISSED")
+  const pending = experts.filter((e: ExpertWithUser) => e.status === "PENDING")
+  const approved = experts.filter((e: ExpertWithUser) => e.status === "APPROVED")
+  const dismissed = experts.filter((e: ExpertWithUser) => e.status === "DISMISSED")
 
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
@@ -34,7 +35,7 @@ export default async function AdminExpertsPage() {
         <div className="mb-10">
           <h2 className="mono text-xs uppercase tracking-widest text-gray-400 mb-4">pending review</h2>
           <div className="grid grid-cols-1 gap-4">
-            {pending.map((e) => <ApplicantCard key={e.id} expert={e as any} />)}
+            {pending.map((e: ExpertWithUser) => <ApplicantCard key={e.id} expert={e} />)}
           </div>
         </div>
       )}
@@ -43,7 +44,7 @@ export default async function AdminExpertsPage() {
         <div className="mb-10">
           <h2 className="mono text-xs uppercase tracking-widest text-gray-400 mb-4">approved</h2>
           <div className="grid grid-cols-1 gap-4">
-            {approved.map((e) => <ApplicantCard key={e.id} expert={e as any} />)}
+            {approved.map((e: ExpertWithUser) => <ApplicantCard key={e.id} expert={e} />)}
           </div>
         </div>
       )}
@@ -52,7 +53,7 @@ export default async function AdminExpertsPage() {
         <div>
           <h2 className="mono text-xs uppercase tracking-widest text-gray-400 mb-4">dismissed</h2>
           <div className="grid grid-cols-1 gap-4 opacity-50">
-            {dismissed.map((e) => <ApplicantCard key={e.id} expert={e as any} />)}
+            {dismissed.map((e: ExpertWithUser) => <ApplicantCard key={e.id} expert={e} />)}
           </div>
         </div>
       )}
