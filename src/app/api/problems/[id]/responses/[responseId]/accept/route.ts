@@ -42,7 +42,6 @@ export async function POST(
     return NextResponse.json({
       success: true,
       requiresEscrowRelease:
-        problem.payment?.method === "CRYPTO" &&
         problem.payment?.status === "CONFIRMED" &&
         !!problem.escrowId,
       escrowId: problem.escrowId,
