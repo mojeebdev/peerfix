@@ -40,6 +40,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const session = await auth()
   return (
     <html lang="en">
+      <head>
+        <script
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id="96f81d83-0906-46b4-987b-1e4e4052f7ea"
+        />
+      </head>
       <body className={inter.className}>
         <Providers session={session}>
           <Navbar />

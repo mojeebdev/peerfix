@@ -1,0 +1,43 @@
+# PeerFix
+
+> A real-time help marketplace where builders post technical problems and get them solved — free from the community or paid via verified experts.
+
+## What PeerFix does
+
+- Builders post technical blockers with title, description, tags, and help type (free or paid)
+- Community members respond to free problems and earn reputation
+- Verified experts solve paid problems and receive 85% of the budget via USDC escrow on Base
+- Platform takes 15% fee via smart contract
+- Problems get unique URLs like /problems/00001/nextauth-session-drops-after-vercel-deploy
+
+## Stack
+
+- Next.js 15, TypeScript, Tailwind CSS
+- Supabase + Prisma (PostgreSQL)
+- NextAuth v5 (Google + GitHub OAuth)
+- Wagmi + Viem (Web3)
+- Smart contract: PeerFixEscrow on Base Mainnet (USDC escrow)
+- Resend (email)
+- Vercel (deployment)
+
+## Key pages
+
+- / — homepage with live problem feed and stats
+- /problems — browse all problems with filters
+- /problems/new — post a new problem
+- /problems/[id]/[slug] — single problem view with responses
+- /expert/apply — apply to become a verified expert
+- /expert — expert dashboard
+- /dashboard — user dashboard
+- /admin/experts — admin panel for approving experts
+- /login — Google + GitHub OAuth
+- /privacy — privacy policy
+- /terms — terms of service
+
+## Business model
+
+Paid problems are funded via USDC on Base. The PeerFixEscrow smart contract holds funds until the problem poster accepts a solution, then auto-releases 85% to the expert and 15% to the platform treasury.
+
+## Built by
+
+BlindspotLab (blindspotlab.xyz) — an innovation by Mojeeb (@mojeebeth / mojeeb.xyz)
