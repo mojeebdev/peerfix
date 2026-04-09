@@ -40,7 +40,7 @@ export default function TagInput({ tags, onChange, suggestions = [] }: TagInputP
   return (
     <div className="flex flex-col gap-2">
       <div className="flex flex-wrap gap-1.5 border border-gray-200 focus-within:border-black rounded-sm px-2 py-2 transition-colors min-h-[42px]">
-        {tags.map((tag) => (
+        {tags.map((tag: any) => (
           <span key={tag} className="mono text-xs bg-black text-white px-2 py-0.5 rounded-sm flex items-center gap-1">
             {tag}
             <button type="button" onClick={() => removeTag(tag)} className="text-gray-400 hover:text-white">

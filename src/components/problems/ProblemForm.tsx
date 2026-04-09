@@ -63,7 +63,7 @@ export default function ProblemForm() {
       <div>
         <label className="mono text-xs text-gray-400 uppercase tracking-widest block mb-2">tags</label>
         <div className="flex flex-wrap gap-2">
-          {SKILL_OPTIONS.map((tag) => (
+          {SKILL_OPTIONS.map((tag: any) => (
             <button
               key={tag}
               type="button"

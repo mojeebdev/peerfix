@@ -23,7 +23,7 @@ export default function FilterTabs() {
 
   return (
     <div className="flex gap-1">
-      {tabs.map((tab) => (
+      {tabs.map((tab: any) => (
         <button
           key={tab.value}
           onClick={() => handleTab(tab.value)}

@@ -47,7 +47,7 @@ export default function ApplicantCard({ expert }: { expert: ExpertWithUser }) {
       <div className="mb-3">
         <p className="mono text-[10px] text-gray-400 uppercase tracking-widest mb-1">expertise</p>
         <div className="flex flex-wrap gap-1.5">
-          {expert.expertise.map((skill) => (
+          {expert.expertise.map((skill: any) => (
             <span key={skill} className="mono text-[10px] bg-gray-100 text-gray-600 px-2 py-0.5 rounded-sm">{skill}</span>
           ))}
         </div>

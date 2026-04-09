@@ -26,7 +26,7 @@ export default function ProblemCard({ problem }: { problem: ProblemWithAuthor })
             {truncate(problem.description, 120)}
           </p>
           <div className="flex items-center gap-3 mt-2">
-            {problem.tags.slice(0, 3).map((tag) => (
+            {problem.tags.slice(0, 3).map((tag: any) => (
               <span key={tag} className="mono text-[10px] bg-gray-100 text-gray-500 px-1.5 py-0.5 rounded-sm">
                 {tag}
               </span>

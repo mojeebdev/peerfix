@@ -19,7 +19,7 @@ export default function ExpertCard({ expert }: { expert: ExpertWithUser }) {
       </div>
 
       <div className="flex flex-wrap gap-1.5 mb-3">
-        {expert.expertise.slice(0, 4).map((skill) => (
+        {expert.expertise.slice(0, 4).map((skill: any) => (
           <span key={skill} className="mono text-[10px] bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded-sm">
             {skill}
           </span>
