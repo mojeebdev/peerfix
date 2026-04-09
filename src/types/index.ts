@@ -1,6 +1,6 @@
-import { UserRole, ProblemStatus, HelpType, PaymentMethod, PaymentStatus, ExpertStatus } from "@prisma/client"
+import { UserRole, ProblemStatus, HelpType, PaymentStatus, ExpertStatus } from "@prisma/client"
 
-export type { UserRole, ProblemStatus, HelpType, PaymentMethod, PaymentStatus, ExpertStatus }
+export type { UserRole, ProblemStatus, HelpType, PaymentStatus, ExpertStatus }
 
 export interface ProblemWithAuthor {
   id: string
@@ -35,6 +35,7 @@ export interface ExpertWithUser {
   status: ExpertStatus
   isAvailable: boolean
   earnings: number
+  walletAddress: string | null
   user: {
     id: string
     name: string | null
@@ -47,5 +48,4 @@ export interface ExpertWithUser {
 export interface PaymentIntent {
   problemId: string
   amount: number
-  method: PaymentMethod
 }
