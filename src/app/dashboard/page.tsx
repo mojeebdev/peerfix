@@ -57,7 +57,7 @@ export default async function DashboardPage() {
           <p className="mono text-xs text-gray-400">no problems posted yet</p>
         </div>
       ) : (
-        problems.map((p) => (
+        problems.map((p: any) => (
           <div key={p.id} className="border-t border-gray-100 py-4 flex items-center justify-between">
             <div>
               <p className="text-sm font-medium">{p.title}</p>
