@@ -19,7 +19,7 @@ export default function AdminStats({ stats }: { stats: Stats }) {
 
   return (
     <div className="grid grid-cols-3 gap-3">
-      {items.map((item) => (
+      {items.map((item: any) => (
         <div key={item.label} className="bg-gray-50 rounded-sm p-4">
           <div className="mono text-xs text-gray-400 mb-1">{item.label}</div>
           <div className="text-2xl font-semibold tracking-tight">{item.value}</div>

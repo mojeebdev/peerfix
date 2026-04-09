@@ -63,7 +63,7 @@ export default async function HomePage() {
           { value: stats.experts.toString(), label: "experts online" },
           { value: stats.problems.toLocaleString(), label: "total problems" },
           { value: "4m", label: "avg response" },
-        ].map((s) => (
+        ].map((s: any) => (
           <div key={s.label} className="py-4 px-4 border-r border-black last:border-r-0">
             <div className="text-2xl font-semibold text-black">{s.value}</div>
             <div className="mono text-xs text-gray-400 mt-1">{s.label}</div>

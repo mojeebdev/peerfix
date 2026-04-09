@@ -37,7 +37,7 @@ export default async function ExpertDashboardPage() {
           { label: "rate", value: `$${expert.hourlyRate}/hr` },
           { label: "experience", value: `${expert.yearsExp} yrs` },
           { label: "status", value: expert.isAvailable ? "available" : "busy" },
-        ].map((s) => (
+        ].map((s: any) => (
           <div key={s.label} className="border border-black rounded-sm p-4">
             <div className="mono text-xs text-gray-400 mb-1">{s.label}</div>
             <div className="font-semibold">{s.value}</div>
@@ -55,7 +55,7 @@ export default async function ExpertDashboardPage() {
             </Link>
           </div>
         ) : (
-          assignedProblems.map((p) => (
+          assignedProblems.map((p: any) => (
             <div key={p.id} className="border-t border-gray-100 py-4 flex items-center justify-between">
               <div>
                 <p className="font-medium text-sm">{p.title}</p>

@@ -19,7 +19,7 @@ export default async function Sidebar() {
   trendingTags.forEach(({ tags }) => {
     tags.forEach((tag) => { tagCounts[tag] = (tagCounts[tag] || 0) + 1 })
   })
-  const sorted = Object.entries(tagCounts).sort((a, b) => b[1] - a[1]).slice(0, 10)
+  const sorted = Object.entries(tagCounts).sort((a: any, b: any) => b[1] - a[1]).slice(0, 10)
 
   return (
     <aside className="w-64 flex-shrink-0">
@@ -29,7 +29,7 @@ export default async function Sidebar() {
             experts online ({onlineExperts.length})
           </p>
           <div className="flex flex-col gap-2">
-            {onlineExperts.map((e) => (
+            {onlineExperts.map((e: any) => (
               <div key={e.id} className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-black flex-shrink-0" />
                 <span className="text-xs text-gray-600 truncate">{e.user.name}</span>

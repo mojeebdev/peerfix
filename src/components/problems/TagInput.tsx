@@ -59,7 +59,7 @@ export default function TagInput({ tags, onChange, suggestions = [] }: TagInputP
 
       {input && filtered.length > 0 && (
         <div className="border border-gray-200 rounded-sm overflow-hidden">
-          {filtered.slice(0, 5).map((s) => (
+          {filtered.slice(0, 5).map((s: any) => (
             <button
               key={s}
               type="button"
