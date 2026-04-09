@@ -1,0 +1,150 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id            String     @id @default(cuid())
+  name          String?
+  email         String     @unique
+  emailVerified DateTime?
+  image         String?
+  role          UserRole   @default(USER)
+  reputation    Int        @default(0)
+  createdAt     DateTime   @default(now())
+  updatedAt     DateTime   @default(now()) @updatedAt
+  accounts      Account[]
+  expert        Expert?
+  payments      Payment[]
+  problems      Problem[]
+  responses     Response[]
+  sessions      Session[]
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+  user              User    @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model Expert {
+  id            String       @id @default(cuid())
+  userId        String       @unique
+  github        String?
+  bio           String
+  expertise     String[]     @default([])
+  yearsExp      Int
+  hourlyRate    Float
+  status        ExpertStatus @default(PENDING)
+  isAvailable   Boolean      @default(true)
+  earnings      Float        @default(0)
+  walletAddress String?
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @default(now()) @updatedAt
+  user          User         @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  responses     Response[]
+}
+
+model Problem {
+  id            String        @id @default(cuid())
+  problemNumber Int           @unique @default(autoincrement())
+  slug          String        @unique
+  title         String
+  description   String
+  helpType      HelpType      @default(FREE)
+  status        ProblemStatus @default(OPEN)
+  tags          String[]      @default([])
+  budget        Float?
+  authorId      String
+  expertId      String?
+  escrowId      String?
+  views         Int           @default(0)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @default(now()) @updatedAt
+  payment       Payment?
+  author        User          @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  responses     Response[]
+}
+
+model Response {
+  id         String   @id @default(cuid())
+  content    String
+  isAccepted Boolean  @default(false)
+  problemId  String
+  authorId   String
+  expertId   String?
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @default(now()) @updatedAt
+  author     User     @relation(fields: [authorId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  expert     Expert?  @relation(fields: [expertId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  problem    Problem  @relation(fields: [problemId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+model Payment {
+  id            String        @id @default(cuid())
+  problemId     String        @unique
+  userId        String
+  amount        Float
+  status        PaymentStatus @default(PENDING)
+  walletAddress String?
+  escrowId      String?
+  onchainTxHash String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @default(now()) @updatedAt
+  problem       Problem       @relation(fields: [problemId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  user          User          @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+}
+
+enum UserRole {
+  USER
+  EXPERT
+  ADMIN
+}
+
+enum ProblemStatus {
+  OPEN
+  IN_PROGRESS
+  SOLVED
+  CLOSED
+}
+
+enum HelpType {
+  FREE
+  PAID
+}
+
+enum PaymentStatus {
+  PENDING
+  CONFIRMED
+  FAILED
+  REFUNDED
+}
+
+enum ExpertStatus {
+  PENDING
+  APPROVED
+  DISMISSED
+}
