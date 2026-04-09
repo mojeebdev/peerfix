@@ -36,7 +36,10 @@ export default function ResponseCard({
 
   const { isLoading: waitingRelease } = useWaitForTransactionReceipt({
     hash: releaseTx,
-    onSuccess: () => router.refresh(),
+    query: {
+      enabled: !!releaseTx,
+      select: () => { router.refresh(); return null },
+    },
   } as any)
 
   async function accept() {
@@ -49,7 +52,7 @@ export default function ResponseCard({
       const data = await res.json()
 
       if (data.requiresEscrowRelease && data.escrowId) {
-        writeContract({
+        ;(writeContract as any)({
           address: ESCROW_ADDRESS,
           abi: ESCROW_ABI,
           functionName: "release",
@@ -66,11 +69,7 @@ export default function ResponseCard({
   const isProcessing = accepting || releasing || waitingRelease
 
   return (
-    <div
-      className={`border rounded-sm p-4 ${
-        response.isAccepted ? "border-black bg-gray-50" : "border-gray-100"
-      }`}
-    >
+    <div className={`border rounded-sm p-4 ${response.isAccepted ? "border-black bg-gray-50" : "border-gray-100"}`}>
       {response.isAccepted && (
         <div className="mono text-[10px] text-black font-medium mb-2 uppercase tracking-widest">
           accepted solution
@@ -80,12 +79,8 @@ export default function ResponseCard({
       <div className="flex items-center gap-2 mb-3">
         <Avatar name={response.author.name} image={response.author.image} size={22} />
         <span className="mono text-xs text-gray-600">{response.author.name}</span>
-        <span className="mono text-xs text-gray-300">
-          {timeAgo(new Date(response.createdAt))}
-        </span>
-        <span className="mono text-xs text-gray-300 ml-auto">
-          {response.author.reputation} rep
-        </span>
+        <span className="mono text-xs text-gray-300">{timeAgo(new Date(response.createdAt))}</span>
+        <span className="mono text-xs text-gray-300 ml-auto">{response.author.reputation} rep</span>
       </div>
 
       <p className="text-sm font-mono text-gray-700 whitespace-pre-wrap leading-relaxed">
@@ -99,10 +94,7 @@ export default function ResponseCard({
           className="mono text-xs border border-black text-black px-3 py-1.5 rounded-sm mt-3 hover:bg-black hover:text-white transition-colors disabled:opacity-50 flex items-center gap-2"
         >
           {isProcessing ? (
-            <>
-              <Spinner size={12} />
-              {releasing || waitingRelease ? "releasing escrow..." : "accepting..."}
-            </>
+            <><Spinner size={12} />{releasing || waitingRelease ? "releasing escrow..." : "accepting..."}</>
           ) : (
             "mark as solution"
           )}

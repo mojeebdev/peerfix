@@ -27,19 +27,26 @@ export default function CryptoPayment({
 
   const { isLoading: waitingApprove } = useWaitForTransactionReceipt({
     hash: approveTx,
-    onSuccess: () => setStep("fund"),
+    query: {
+      enabled: !!approveTx,
+      select: () => { setStep("fund"); return null },
+    },
   } as any)
 
   const { isLoading: waitingFund } = useWaitForTransactionReceipt({
     hash: fundTx,
-    onSuccess: async () => {
-      setStep("done")
-      await fetch("/api/payments/crypto/confirm", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ problemId, txHash: fundTx }),
-      })
-      onSuccess?.()
+    query: {
+      enabled: !!fundTx,
+      select: async () => {
+        setStep("done")
+        await fetch("/api/payments/crypto/confirm", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ problemId, txHash: fundTx }),
+        })
+        onSuccess?.()
+        return null
+      },
     },
   } as any)
 
@@ -77,7 +84,7 @@ export default function CryptoPayment({
       {step === "approve" && (
         <button
           onClick={() =>
-            approve({
+            (approve as any)({
               address: USDC_ADDRESS,
               abi: USDC_ABI,
               functionName: "approve",
@@ -97,7 +104,7 @@ export default function CryptoPayment({
       {step === "fund" && (
         <button
           onClick={() =>
-            fund({
+            (fund as any)({
               address: ESCROW_ADDRESS,
               abi: ESCROW_ABI,
               functionName: "createAndFund",
