@@ -5,17 +5,18 @@ import { sendExpertApprovedEmail } from "@/lib/resend"
 
 export async function PATCH(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const session = await auth()
     if (!session || session.user.role !== "ADMIN")
       return NextResponse.json({ error: "Forbidden" }, { status: 403 })
 
+    const { id } = await params
     const { status } = await req.json()
 
     const expert = await prisma.expert.update({
-      where: { id: params.id },
+      where: { id },
       data: { status },
       include: { user: true },
     })

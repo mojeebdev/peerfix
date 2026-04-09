@@ -2,9 +2,13 @@ import { NextRequest, NextResponse } from "next/server"
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
 
-export async function GET(req: NextRequest, { params }: { params: { id: string } }) {
+export async function GET(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
-    const problemNumber = parseInt(params.id)
+    const { id } = await params
+    const problemNumber = parseInt(id)
 
     const problem = await prisma.problem.findUnique({
       where: { problemNumber },
@@ -28,18 +32,22 @@ export async function GET(req: NextRequest, { params }: { params: { id: string }
     })
 
     return NextResponse.json({ problem })
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Failed to fetch problem" }, { status: 500 })
   }
 }
 
-export async function PATCH(req: NextRequest, { params }: { params: { id: string } }) {
+export async function PATCH(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
   try {
     const session = await auth()
     if (!session) return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
 
+    const { id } = await params
+    const problemNumber = parseInt(id)
     const body = await req.json()
-    const problemNumber = parseInt(params.id)
 
     const problem = await prisma.problem.findUnique({ where: { problemNumber } })
     if (!problem) return NextResponse.json({ error: "Not found" }, { status: 404 })
@@ -52,7 +60,7 @@ export async function PATCH(req: NextRequest, { params }: { params: { id: string
     })
 
     return NextResponse.json({ problem: updated })
-  } catch (error) {
+  } catch {
     return NextResponse.json({ error: "Failed to update problem" }, { status: 500 })
   }
 }

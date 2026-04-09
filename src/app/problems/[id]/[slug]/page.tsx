@@ -10,10 +10,11 @@ import PaymentModal from "@/components/payments/PaymentModal"
 export default async function ProblemPage({
   params,
 }: {
-  params: { id: string; slug: string }
+  params: Promise<{ id: string; slug: string }>
 }) {
   const session = await auth()
-  const problemNumber = parseInt(params.id)
+  const { id, slug } = await params
+  const problemNumber = parseInt(id)
 
   const problem = await prisma.problem.findUnique({
     where: { problemNumber },
@@ -37,6 +38,10 @@ export default async function ProblemPage({
   })
 
   const isAuthor = session?.user.id === problem.authorId
+
+  const expert = problem.expertId
+    ? await prisma.expert.findUnique({ where: { id: problem.expertId } })
+    : null
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-10">
@@ -75,12 +80,12 @@ export default async function ProblemPage({
           </div>
         )}
 
-        {problem.helpType === "PAID" && problem.budget && (
-          <div className="mt-4 flex items-center gap-3">
-            <span className="mono text-xs text-gray-400">budget: ${problem.budget}</span>
-            {!problem.payment && session && !isAuthor && (
-              <PaymentModal problem={problem as any} />
-            )}
+        {problem.helpType === "PAID" && problem.budget && !problem.payment && session && !isAuthor && expert?.walletAddress && (
+          <div className="mt-4">
+            <PaymentModal
+              problem={problem as any}
+              expertWallet={expert.walletAddress as `0x${string}`}
+            />
           </div>
         )}
       </div>
@@ -101,6 +106,8 @@ export default async function ProblemPage({
                 response={response as any}
                 isAuthor={isAuthor}
                 problemId={problem.id}
+                escrowId={problem.escrowId}
+                isCryptoPaid={problem.payment?.status === "CONFIRMED"}
               />
             ))}
           </div>
