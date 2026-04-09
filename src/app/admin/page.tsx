@@ -69,7 +69,7 @@ export default async function AdminPage() {
 
       <div>
         <h2 className="mono text-xs uppercase tracking-widest text-gray-400 mb-4">recent problems</h2>
-        {recentProblems.map((p) => (
+        {recentProblems.map((p: any) => (
           <div key={p.id} className="border-t border-gray-100 py-3 flex items-center justify-between">
             <div>
               <p className="text-sm font-medium">{p.title}</p>
