@@ -29,16 +29,18 @@ export default function Footer() {
         </div>
 
         <div className="border-t border-gray-100 pt-4 flex items-center justify-between flex-wrap gap-3">
-          <p className="mono text-xs text-gray-300">© {new Date().getFullYear()} peerfix.dev</p>
+          <p className="mono text-xs text-gray-300">
+            © {new Date().getFullYear()} PeerFix. All rights reserved.
+          </p>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-4 flex-wrap">
             
               href="https://blindspotlab.xyz"
               target="_blank"
               rel="noreferrer"
               className="flex items-center gap-1.5 mono text-xs text-gray-400 hover:text-black transition-colors"
             >
-              <Image
+              <img
                 src="https://blindspotlab.xyz/logo.png"
                 alt="BlindspotLab"
                 width={16}
@@ -50,18 +52,13 @@ export default function Footer() {
 
             <span className="text-gray-200">·</span>
 
-            
-              href="https://mojeeb.xyz"
-              target="_blank"
-              rel="noreferrer"
-              className="mono text-xs text-gray-400 hover:text-black transition-colors"
-            >
+            <span className="mono text-xs text-gray-400">
               made with ❤️ by{" "}
               
-                href="https://x.com/mojeebeth"
+                href="https://mojeeb.xyz"
                 target="_blank"
                 rel="noreferrer"
-                className="hover:underline"
+                className="hover:underline hover:text-black transition-colors"
               >
                 @mojeebeth
               </a>
