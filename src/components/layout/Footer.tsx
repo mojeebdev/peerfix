@@ -60,7 +60,7 @@ export default function Footer() {
                 rel="noreferrer"
                 className="hover:underline hover:text-black transition-colors"
               >
-                @mojeebeth
+                @MojeebMotion
               </a>
             </span>
           </div>

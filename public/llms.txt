@@ -40,4 +40,4 @@ Paid problems are funded via USDC on Base. The PeerFixEscrow smart contract hold
 
 ## Built by
 
-BlindspotLab (blindspotlab.xyz) — an innovation by Mojeeb (@mojeebeth / mojeeb.xyz)
+BlindspotLab (blindspotlab.xyz) — an innovation by Mojeeb (@MojeebMotion / mojeeb.xyz)
