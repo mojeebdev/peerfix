@@ -9,8 +9,8 @@ import "./globals.css"
 const inter = Inter({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "PeerFix — Builders helping builders",
-  description: "Post a blocker, get free community help or pay an expert to solve it instantly.",
+  title: "PeerFix — Landing page redesigns, AI automation & technical SEO for builders",
+  description: "Productized service: unlimited landing page redesigns, AI automation setup, and technical SEO. One request at a time, async. Built for indie SaaS and AI tools.",
   metadataBase: new URL("https://peerfix.dev"),
   icons: {
     icon: [
@@ -21,8 +21,8 @@ export const metadata: Metadata = {
     shortcut: "/favicon-32x32.png",
   },
   openGraph: {
-    title: "PeerFix — Builders helping builders",
-    description: "Post a blocker, get free community help or pay an expert to solve it instantly.",
+    title: "PeerFix — Fix your landing page. Then keep fixing it.",
+    description: "Landing page redesigns, AI automation, and technical SEO for indie builders. Flat monthly or fixed sprint.",
     url: "https://peerfix.dev",
     siteName: "PeerFix",
     type: "website",
@@ -30,8 +30,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "PeerFix — Builders helping builders",
-    description: "Post a blocker, get free community help or pay an expert to solve it instantly.",
+    title: "PeerFix — Landing page redesigns + AI automation for builders",
+    description: "One request at a time. Async. Built for indie SaaS and AI tools.",
     images: ["/twitter-card.png"],
   },
 }
