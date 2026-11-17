@@ -19,10 +19,10 @@ export default function HomePage() {
         </p>
         <div className="flex flex-wrap gap-3">
           <Link
-            href="https://cal.com/mojeeb/peerfix"
+            href="https://calendly.com/mojeeb-blindspotlab/30min"
             className="mono text-sm bg-black text-white px-5 py-2.5 rounded-sm hover:bg-gray-900 transition-colors"
           >
-            book a 15-min call
+            book a 30-min call
           </Link>
           <Link
             href="#pricing"
@@ -100,7 +100,7 @@ export default function HomePage() {
               <li>• Technical SEO foundations</li>
               <li>• Revisions until satisfied</li>
             </ul>
-            <Link href="https://cal.com/mojeeb/peerfix" className="mono text-sm bg-black text-white px-4 py-2 inline-block rounded-sm">
+            <Link href="https://calendly.com/mojeeb-blindspotlab/30min" className="mono text-sm bg-black text-white px-4 py-2 inline-block rounded-sm">
               start monthly
             </Link>
           </div>
@@ -114,7 +114,7 @@ export default function HomePage() {
               <li>• Basic schema & on-page SEO</li>
               <li>• 2 rounds of revisions</li>
             </ul>
-            <Link href="https://cal.com/mojeeb/peerfix" className="mono text-sm border border-black text-black px-4 py-2 inline-block rounded-sm">
+            <Link href="https://calendly.com/mojeeb-blindspotlab/30min" className="mono text-sm border border-black text-black px-4 py-2 inline-block rounded-sm">
               book a sprint
             </Link>
           </div>
@@ -136,9 +136,9 @@ export default function HomePage() {
       {/* CTA */}
       <section className="py-20 text-center">
         <h2 className="text-3xl font-semibold tracking-tight mb-4">Ready to fix the page?</h2>
-        <p className="text-gray-600 mb-6 max-w-md mx-auto">15-minute intro. No pitch deck. We look at what you have and tell you what we can ship.</p>
+        <p className="text-gray-600 mb-6 max-w-md mx-auto">30-minute intro. No pitch deck. We look at what you have and tell you what we can ship.</p>
         <Link
-          href="https://cal.com/mojeeb/peerfix"
+          href="https://calendly.com/mojeeb-blindspotlab/30min"
           className="mono text-sm bg-black text-white px-6 py-3 rounded-sm hover:bg-gray-900 transition-colors"
         >
           book the call
